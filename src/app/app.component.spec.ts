@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HttpService } from './services/http.service';
+import { CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -7,6 +9,10 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        HttpService
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   });
 
