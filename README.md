@@ -1,5 +1,7 @@
 # FieloChallenge
 
+Project to see a list of users and check their details and activities.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.0.
 
 ## Run the back-end server
