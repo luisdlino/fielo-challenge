@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* Reset css */
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  color: #0d435c;
+}
+
+p {
+  margin: 0;
+}
+
+@media all and (max-width: 1023px) {
+
+  body {
+    overflow: auto;
+  }
+
+}
+
+

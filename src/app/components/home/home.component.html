@@ -1,0 +1,91 @@
+<main [ngStyle]="{'background-image': 'url(' + img + ')'}">
+
+  <!-- User List -->
+  <div class="card" *ngIf="!loading">
+    <div class="users-list-title">
+      <span>Pos.</span>
+      <span>Member</span>
+      <span>Points</span>
+    </div>
+    <div class="users-list">
+      <div *ngFor="let user of fullUsers; let i = index" class="users-item" (click)="selectUser(user)">
+        <span>{{i+1}}</span>
+        <img [src]="user.image ? user.image : 'assets/blank-avatar.jpg'" class="user-list-image">
+
+        <span>{{user.name}}</span>
+        <span>{{user.balance.points}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Details -->
+  <div class="card" *ngIf="selectedUser.job != ''">
+    <div class="user-detail-info">
+      <img [src]="selectedUser.user.image ? selectedUser.user.image : 'assets/blank-avatar.jpg'">
+      <p class="title-name">{{selectedUser.user.name}}</p>
+      <p>{{selectedUser.job}}</p>
+    </div>
+
+    <div class="user-detail-points-container">
+      <div class="user-detail-points">
+        <p class="user-detail-points-title">
+          <mat-icon fontIcon="join_inner"></mat-icon>{{selectedUser.user.balance.points}}
+        </p>
+        <p>Points</p>
+      </div>
+      <div class="user-detail-points">
+        <p class="user-detail-points-title">
+          {{selectedUser.user.balance.miles}}
+        </p>
+        <p>Miles</p>
+      </div>
+      <div class="user-detail-points">
+        <p class="user-detail-points-title">
+          {{selectedUser.user.balance.currency | currency}}
+        </p>
+        <p>Currency</p>
+      </div>
+    </div>
+
+    <div class="user-tier-step">
+      <div class="user-tier-title">
+        <span>{{selectedUser.level.init}}</span>
+        <span><span class="dollar-sign">Next Tier </span>{{selectedUser.level.next}}</span></div>
+      <div class="steper">
+          <mat-icon class="radio_button_checked">radio_button_checked</mat-icon>
+          <span [ngClass]="selectedUser.level.index > 0 ? 'step radio_button_checked' : 'step radio_button_unchecked'"></span>
+          <mat-icon [ngClass]="selectedUser.level.index > 0 ? 'radio_button_checked' : 'radio_button_unchecked'">{{selectedUser.level.index > 0 ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
+          <span [ngClass]="selectedUser.level.index > 1 ? 'step radio_button_checked' : 'step radio_button_unchecked'"></span>
+          <mat-icon [ngClass]="selectedUser.level.index > 1 ? 'radio_button_checked' : 'radio_button_unchecked'">{{selectedUser.level.index > 1 ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
+          <span [ngClass]="selectedUser.level.index > 2 ? 'step radio_button_checked' : 'step radio_button_unchecked'"></span>
+          <mat-icon [ngClass]="selectedUser.level.index > 2 ? 'radio_button_checked' : 'radio_button_unchecked'">{{selectedUser.level.index > 2 ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Activity Feed -->
+  <div class="card" *ngIf="selectedUser.job != ''">
+    <div class="user-feed">
+      <p class="user-feed-title">Activity Feed</p>
+      <p class="user-feed-filter">Show Filter</p>
+    </div>
+    <div class="user-feed-list">
+      <div class="user-feed-item" *ngFor="let activity of selectedUser.activities">
+        <div class="user-feed-icon">
+          <mat-icon *ngIf="activity.description.split(' ')[0] == 'Completed'" class="flag">flag</mat-icon>
+          <mat-icon *ngIf="activity.description.split(' ')[0] == 'Received'" class="radio_button_checked">radio_button_checked</mat-icon>
+          <mat-icon *ngIf="activity.description.split(' ')[0] == 'Redeemed'" class="lock">lock</mat-icon>
+        </div>
+        <div>
+          <p class="user-feed-date">{{activity.date}}</p>
+          <p>{{activity.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</main>
+
+
+<loading-component *ngIf="loading"></loading-component>
